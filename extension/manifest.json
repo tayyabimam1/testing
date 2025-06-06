@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "DeepSight",
+  "version": "2.0",
+  "description": "Uncovering Digital Truth",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "contextMenus",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "*://*.youtube.com/*",
+    "*://*.x.com/*",
+    "*://*.instagram.com/*",
+    "*://*.tiktok.com/*",
+    "*://localhost/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.x.com/*",
+        "*://*.instagram.com/*",
+        "*://*.tiktok.com/*"
+      ],
+      "css": ["styles.css"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [{
+    "resources": ["icons/*", "images/*"],
+    "matches": ["<all_urls>"]
+  }]
+}

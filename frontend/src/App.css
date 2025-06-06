@@ -1,0 +1,107 @@
+* {
+    scroll-behavior: smooth;
+}
+
+.custom-bg {
+  background-color: #142046;
+}
+
+.head-bg {
+    background-color: rgba(16, 21, 40, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.btn-color {
+    background-color: #1E293B;
+}
+
+.btn-color2 {
+    background-color: #3777E1;
+}
+
+
+.text-mute {
+    color: #94A3B8;
+}
+
+.text-color {
+    color: #DBEAFE;
+}
+
+.hero-section {
+    padding: 220px 0;
+    margin-top: -8px;
+}
+
+.predict-page {
+    padding-top: 100px;
+    min-height: 100vh;
+}
+
+.card-contain-color {
+    background-color: #0F1729;
+}
+
+
+.predict-page {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #0F1729, #1a2537);
+}
+
+.custom-btn {
+    border: 2px solid #94A3B8;
+    color: #94A3B8;
+    transition: all 0.3s ease;
+}
+
+.custom-btn:hover {
+    background-color: #94A3B8;
+    color: #fff;
+}
+
+/* FAQ Styles */
+.faq-question {
+    cursor: pointer;
+}
+
+.faq-question:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.faq-question.active {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.custom-card {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.custom-color {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+}
+
+.sign-up {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input, select {
+    border-radius: 5px;
+    border: 2px solid transparent;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border: 2px solid #3777E1;
+}
+
+.login-page {
+    min-height: 100vh;
+    padding: 170px 0 50px 0;
+}

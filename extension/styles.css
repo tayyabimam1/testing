@@ -1,0 +1,232 @@
+/* Main container styles */
+.deepdetect-container {
+  position: fixed;
+  display: none;
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s ease;
+  z-index: 2147483647;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  max-width: 250px;
+  pointer-events: auto;
+  user-select: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  overflow: hidden;
+  background: rgba(20, 20, 30, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.deepdetect-wrapper {
+  position: relative;
+  width: 100%;
+  z-index: 2147483647;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Alert banner styles */
+.deepdetect-banner {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 6px 6px 0 0;
+}
+
+.deepdetect-banner.real {
+  background: linear-gradient(90deg, #4ade80, #22c55e);
+}
+
+.deepdetect-banner.fake {
+  background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
+}
+
+.deepdetect-warning-icon {
+  margin-right: 6px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.deepdetect-logo {
+  width: 20px;
+  height: 20px;
+  background: white;
+  color: #3a86ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 8px;
+  flex-shrink: 0;
+  font-size: 10px;
+}
+
+.deepdetect-logo-header {
+  width: 32px;
+  height: 32px;
+  background: white;
+  color: #3a86ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 12px;
+}
+
+/* Panel styles */
+.deepdetect-panel {
+  background: rgba(20, 20, 30, 0.95);
+  border-radius: 0 0 6px 6px;
+  padding: 12px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.deepdetect-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.deepdetect-title h3 {
+  margin: 0;
+  color: white;
+  font-size: 16px;
+}
+
+.deepdetect-title p {
+  margin: 3px 0 0;
+  font-size: 10px;
+  color: #aaa;
+}
+
+.deepdetect-preview {
+  margin-bottom: 12px;
+}
+
+.deepdetect-video-preview {
+  width: 100%;
+  height: 90px;
+  background: #111;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.deepdetect-preview-canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.deepdetect-analyze-btn {
+  width: 100%;
+  padding: 8px;
+  background: linear-gradient(90deg, #3a86ff, #8338ec);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.deepdetect-analyze-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(58, 134, 255, 0.4);
+}
+
+.deepdetect-analyze-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Results styles */
+.deepdetect-results {
+  margin-top: 12px;
+}
+
+.deepdetect-result {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.deepdetect-result.real {
+  color: #4ade80;
+}
+
+.deepdetect-result.fake {
+  color: #ff4d4d;
+}
+
+.deepdetect-result.error {
+  color: #ffcc00;
+}
+
+.deepdetect-confidence-label {
+  font-size: 10px;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.confidence-bar {
+  height: 6px;
+  background: #3a86ff;
+  border-radius: 3px;
+  margin-bottom: 4px;
+  transition: width 0.5s ease;
+}
+
+.confidence-bar.real {
+  background: linear-gradient(90deg, #4ade80, #22c55e);
+}
+
+.confidence-bar.fake {
+  background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
+}
+
+.confidence-value {
+  text-align: right;
+  font-size: 12px;
+  color: #ddd;
+}
+
+.deepdetect-footer {
+  margin-top: 12px;
+  font-size: 9px;
+  text-align: center;
+  color: #666;
+}
+
+/* Animation for analysis */
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.analyzing {
+  animation: pulse 1.5s infinite;
+}
+
+/* Ensure alert text is visible but not too long */
+.deepdetect-alert {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 170px;
+}

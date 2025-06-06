@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DeepSight</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    
+    @keyframes pulse {
+      0% {
+        opacity: 0.6;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0.6;
+      }
+    }
+    
+    body {
+      width: 320px;
+      padding: 0;
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0F1421;
+      color: white;
+      overflow: hidden;
+      line-height: 1.4;
+    }
+
+    .deepdetect-banner {
+      display: flex;
+      align-items: center;
+      padding: 10px 16px;
+      background: linear-gradient(135deg, #FF4C4C, #FF2D55);
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 1px 8px rgba(255, 45, 85, 0.3);
+      gap: 8px;
+    }
+
+    .deepdetect-banner.real {
+      background: linear-gradient(135deg, #34C759, #30B350);
+      box-shadow: 0 1px 8px rgba(52, 199, 89, 0.3);
+    }
+
+    .deepdetect-warning-icon {
+      font-size: 16px;
+    }
+
+    .deepdetect-logo {
+      background: white;
+      color: #0A84FF;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 12px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .deepdetect-panel {
+      padding: 16px;
+    }
+
+    .deepdetect-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+
+    .deepdetect-logo-header {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #0A84FF, #5E5CE6);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      box-shadow: 0 4px 8px rgba(10, 132, 255, 0.25);
+    }
+
+    .deepdetect-title h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .deepdetect-title p {
+      margin: 2px 0 0;
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .deepdetect-preview {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .deepdetect-video-preview {
+      width: 100%;
+      height: 140px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      overflow: hidden;
+    }
+
+    .deepdetect-analyze-btn {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(135deg, #0A84FF, #5E5CE6);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(10, 132, 255, 0.25);
+    }
+
+    .deepdetect-analyze-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(10, 132, 255, 0.35);
+    }
+
+    .deepdetect-analyze-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 8px rgba(10, 132, 255, 0.25);
+    }
+
+    .deepdetect-analyze-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .deepdetect-results {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .deepdetect-result {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .deepdetect-result.analyzing {
+      color: #0A84FF;
+    }
+
+    .deepdetect-result.fake {
+      color: #FF2D55;
+    }
+
+    .deepdetect-result.real {
+      color: #34C759;
+    }
+
+    .deepdetect-confidence-label {
+      font-size: 13px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .confidence-bar-container {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 6px;
+      position: relative;
+    }
+
+    .confidence-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, #0A84FF, #5E5CE6);
+      border-radius: 4px;
+      transition: width 0.5s ease-out;
+    }
+
+    .confidence-bar.fake {
+      background: linear-gradient(to right, #FF2D55, #FF375F);
+    }
+
+    .confidence-bar.real {
+      background: linear-gradient(to right, #34C759, #30B350);
+    }
+
+    .confidence-value {
+      font-size: 13px;
+      text-align: right;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .deepdetect-footer {
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.4);
+      padding: 12px 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="deepdetect-banner">
+    <div class="deepdetect-logo">DS</div>
+    <div class="deepdetect-alert">DeepSight Alert: Click Detect to analyze</div>
+  </div>
+
+  <div class="deepdetect-panel">
+    <div class="deepdetect-header">
+      <div class="deepdetect-logo-header">DS</div>
+      <div class="deepdetect-title">
+        <h3>DeepSight</h3>
+        <p>Uncovering Digital Truth</p>
+      </div>
+    </div>
+
+    <div class="deepdetect-preview">
+      <div class="deepdetect-video-preview">
+        Select a video on the page to analyze
+      </div>
+      <button class="deepdetect-analyze-btn" disabled>Select Video First</button>
+    </div>
+
+    <div class="deepdetect-results">
+      <div class="deepdetect-result">No video selected</div>
+      <div class="deepdetect-confidence-label">
+        <span>AI Confidence</span>
+        <span class="confidence-value">0%</span>
+      </div>
+      <div class="confidence-bar-container">
+        <div class="confidence-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="deepdetect-footer">
+    &copy; DeepSight AI-powered deepfake detection
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
