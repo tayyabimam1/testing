@@ -1,0 +1,28 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Friday, June 6, 2025 6:46:54 PM
+   Source : C:\Users\Tayyab Imam\Desktop\frontend\DeepSight_FYP-master\server\
+     Dest : C:\Users\Tayyab Imam\Desktop\frontend\DeepSight_FYP-master\deepsight-api\
+
+    Files : *.*
+	    
+  Options : *.* /S /E /COPYALL /NP /R:1 /W:1 
+
+------------------------------------------------------------------------------
+
+ERROR : You do not have the Manage Auditing user right.
+*****  You need this to copy auditing information (/COPY:U or /COPYALL).
+
+       Simple Usage :: ROBOCOPY source destination /MIR
+
+             source :: Source Directory (drive:\path or \\server\share\path).
+        destination :: Destination Dir  (drive:\path or \\server\share\path).
+               /MIR :: Mirror a complete directory tree.
+
+    For more usage information run ROBOCOPY /?
+
+                                                          
+****  /MIR can DELETE files as well as copy them !
