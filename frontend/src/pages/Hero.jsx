@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
-import Img1 from '../assets/img1.jpg' 
+import Img1 from '@/assets/img1.jpg' 
 
 const Hero = () => {
   return (
