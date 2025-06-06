@@ -1,2 +1,12 @@
 [phases.setup]
-nixPkgs = ["python311", "cmake", "gcc", "gnumake", "pkg-config"]
+nixPkgs = ["python311", "python311Packages.pip", "python311Packages.venv", "cmake", "gcc", "gnumake", "pkg-config"]
+
+[phases.install]
+cmds = [
+    "python -m venv /opt/venv",
+    ". /opt/venv/bin/activate",
+    "pip install -r requirements.txt"
+]
+
+[start]
+cmd = ". /opt/venv/bin/activate && uvicorn app:app --host 0.0.0.0 --port $PORT"
