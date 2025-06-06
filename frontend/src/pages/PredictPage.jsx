@@ -43,7 +43,7 @@ const UploadPage = () => {
     formData.append("sequence_length", 20);
 
     try {
-      const response = await fetch("http://localhost:8000/api/upload", {
+      const response = await fetch("https://tayyabimam-deepsight-api.hf.space/upload", {
         method: "POST",
         body: formData,
       });
@@ -156,7 +156,7 @@ const UploadPage = () => {
               <div>
                 <h3 className="mb-3 text-color">AI Analysis Visualization</h3>
                 <img 
-                  src={`http://localhost:8000${result.analysis_image}`}
+                  src={`https://tayyabimam-deepsight-api.hf.space${result.analysis_image}`}
                   alt="GradCAM Analysis"
                   className="img-fluid mb-3"
                 />
