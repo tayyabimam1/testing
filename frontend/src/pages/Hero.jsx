@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
-import Img1 from '../assets/img1.jpg'
+
 
 const Hero = () => {
   return (
@@ -15,7 +15,7 @@ const Hero = () => {
             <Button variant='outline-primary' className='text-white px-5 fw-bold mt-2 ms-3'><a href='#work' className='text-decoration-none fw-bold text-white'>How it works</a></Button>
           </div>
           <div className="col-md-6 text-center">
-            <img src={Img1} alt="Failed to load image" className='img-fluid' style={{maxHeight: '400px'}} />
+          
           </div>
         </div>
       </div>
