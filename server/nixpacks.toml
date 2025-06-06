@@ -1,26 +1,21 @@
 [phases.setup]
-<<<<<<< HEAD
-nixPkgs = ["python311", "python311Packages.pip", "python311Packages.venv", "cmake", "gcc", "gnumake", "pkg-config"]
+nixPkgs = [
+    "python311",
+    "python311Packages.pip",
+    "python311Packages.virtualenv",  # Alternative to venv
+    "cmake",
+    "gcc",
+    "gnumake",
+    "pkg-config"
+]
 
 [phases.install]
 cmds = [
-    "python -m venv /opt/venv",
+    "python -m virtualenv /opt/venv",
     ". /opt/venv/bin/activate",
+    "pip install --upgrade pip",
     "pip install -r requirements.txt"
 ]
 
 [start]
 cmd = ". /opt/venv/bin/activate && uvicorn app:app --host 0.0.0.0 --port $PORT"
-=======
-nixPkgs = ["python311", "python311Packages.pip", "python311Packages.venv", "cmake", "gcc", "gnumake", "pkg-config"] # Added pip and venv explicitly
-
-[phases.install]
-cmds = [
-    "python -m venv /opt/venv",       # Create a virtual environment
-    ". /opt/venv/bin/activate",       # Activate the virtual environment
-    "pip install -r requirements.txt" # Install packages into the venv
-]
-
-[start]
-cmd = ". /opt/venv/bin/activate && uvicorn app:app --host 0.0.0.0 --port $PORT" # Activate venv for start command too
->>>>>>> d83af60e97dd52db426f665adb4a62280ea1f892
