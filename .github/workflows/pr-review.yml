@@ -1,0 +1,59 @@
+name: AI PR review
+
+# The moment a PR is opened or reopened (forks included), review the diff with
+# an AI model and post the verdict as a PR comment.
+# Comments only — it never approves, requests changes formally, or merges.
+#
+# Zero-setup: reviews run on GitHub Models (free for every repo) using the
+# workflow's own GITHUB_TOKEN with `models: read` — no secrets, no variables.
+# To use a different backend instead, set the REVIEW_BACKEND repo variable:
+#   freellmapi: the owner's FreeLLMAPI gateway (needs FREELLMAPI_KEY secret
+#     and REVIEW_MODEL variable).
+#   meta: Muse via the Meta Model API (needs META_API_KEY secret;
+#     REVIEW_MODEL defaults to muse-spark-1.3).
+#
+# Quota guardrails:
+# - fires on opened/reopened only, never on every push; skips drafts and bots;
+# - monthly review budget tracked in .github/pr-review-budget.json
+#   (default 30, set REVIEW_MONTHLY_LIMIT repo variable to change).
+#
+# Portable: the script reads the repo from GITHUB_REPOSITORY, so these two
+# files (.github/workflows/pr-review.yml + scripts/pr_review.py) drop into
+# any repo and just work.
+on:
+  pull_request_target:
+    types: [opened, reopened]
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: "PR number to (re-)review"
+        required: true
+
+permissions:
+  pull-requests: write
+  contents: write
+  models: read
+
+# Security: pull_request_target is used so fork PRs can be commented on, but
+# nothing from the PR is ever executed — the script below comes from the base
+# branch and the diff is only ever sent to the LLM as data.
+
+jobs:
+  review:
+    # Settings kill-switch: set the PR_REVIEW_ENABLED repo variable to "false"
+    # (Settings → Secrets and variables → Actions → Variables) to turn the
+    # reviewer off for that repo. Unset (or anything else) = enabled.
+    if: ${{ vars.PR_REVIEW_ENABLED != 'false' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: AI review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REVIEW_BACKEND: ${{ vars.REVIEW_BACKEND }}
+          REVIEW_MODEL: ${{ vars.REVIEW_MODEL }}
+          PR_NUMBER: ${{ github.event.inputs.pr || github.event.pull_request.number }}
+        run: python scripts/pr_review.py
